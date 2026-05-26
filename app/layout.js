@@ -1,19 +1,19 @@
 export const metadata = {
   title: "Mortgage Affordability Calculator | Know Exactly How Much House You Can Afford",
   description: "Calculate how much house you can afford and what your monthly mortgage payment will be. Includes full PITI breakdown, DTI analysis, PMI guidance, and an amortization schedule.",
-  
+
   alternates: {
-    canonical: "https:/https://www.mortgageaffordabilityestimator.com",           // ← MUST CHANGE
+    canonical: "https://www.mortgageaffordabilityestimator.com",
   },
 
   openGraph: {
     title: "Mortgage Affordability Calculator | Know Exactly How Much House You Can Afford",
     description: "Calculate how much house you can afford and what your monthly mortgage payment will be. Includes full PITI breakdown, DTI analysis, PMI guidance, and an amortization schedule.",
-    url: "https://www.mortgageaffordabilityestimator.com",                 // ← MUST CHANGE
-    siteName: "Moneywise Calculators",             // ← Change
+    url: "https://www.mortgageaffordabilityestimator.com",
+    siteName: "Mortgage Affordability Estimator",
     images: [
       {
-        url: "https://https://www.mortgageaffordabilityestimator.com/og-image.png", // ← MUST CHANGE
+        url: "https://www.mortgageaffordabilityestimator.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Mortgage Affordability Calculator",
@@ -26,7 +26,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Mortgage Affordability Calculator | Know Exactly How Much House You Can Afford",
-    description: "Calculate how much house you can afford and what your monthly mortgage payment will be. Includes full PITI breakdown, DTI analysis, PMI guidance, and an amortization schedule.",
+    description: "Calculate how much house you can afford and what your monthly mortgage payment will be. Includes PITI breakdown, DTI analysis, and amortization schedule.",
   },
 
   robots: {
@@ -46,13 +46,7 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
-
-  authors: [{name: "David Graham" }],
+  authors: [{ name: "David Graham" }],
   creator: "MoneyWise Calculators",
   publisher: "MoneyWise Calculators",
 };
@@ -61,28 +55,37 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* AdSense */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3475627763908800"
           crossOrigin="anonymous"
         ></script>
-              <script
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebApplication",
-              name: "mortgage-tool",
-              description: "Financial calculator tool",
-              url: "https://www.mortgage-tool.com",
-              applicationCategory: "Finance",
+              name: "Mortgage Affordability Calculator",
+              description: "Free tool to calculate how much house you can afford and what your monthly mortgage payment will be. Includes PITI breakdown, DTI analysis, PMI guidance, and amortization schedule.",
+              url: "https://www.mortgageaffordabilityestimator.com",
+              applicationCategory: "FinanceApplication",
               operatingSystem: "All",
-              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
+              browserRequirements: "Requires JavaScript",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD"
+              },
+              author: {
+                "@type": "Organization",
+                name: "MoneyWise Calculators",
+                url: "https://moneywisecalculator.com"
+              }
             }),
           }}
         />
-    </head>
+      </head>
       <body>{children}</body>
     </html>
   );
