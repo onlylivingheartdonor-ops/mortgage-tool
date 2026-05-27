@@ -73,14 +73,21 @@ const staticCss = `
   .mtg-prose p:last-child { margin-bottom: 0; }
   .mtg-prose ul { font-size: 13px; color: #444; line-height: 1.8; padding-left: 1.2rem; margin-bottom: .75rem; }
   .mtg-prose ul li { margin-bottom: .3rem; }
-  .mtg-tip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .mtg-tip-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: #fde68a; line-height: 1; margin-bottom: .4rem; }
-  .mtg-tip-title { font-size: 12px; font-weight: 500; color: #1a1a1a; margin-bottom: .25rem; }
-  .mtg-tip-body { font-size: 12px; color: #888; line-height: 1.5; }
   .mtg-faq-item { border-bottom: 1px solid #e0dbd3; padding: 1rem 0; }
   .mtg-faq-item:last-child { border-bottom: none; padding-bottom: 0; }
   .mtg-faq-q { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: .4rem; }
   .mtg-faq-a { font-size: 13px; color: #555; line-height: 1.7; }
+  .mtg-tip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .mtg-tip-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: #fde68a; line-height: 1; margin-bottom: .4rem; }
+  .mtg-tip-title { font-size: 12px; font-weight: 500; color: #1a1a1a; margin-bottom: .25rem; }
+  .mtg-tip-body { font-size: 12px; color: #888; line-height: 1.5; }
+  .mtg-realworld { background: #fefce8; border: 1px solid #fde68a; border-radius: 4px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .mtg-realworld-title { font-size: 13px; font-weight: 600; color: #92400e; margin-bottom: .5rem; }
+  .mtg-realworld-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: .75rem; }
+  .mtg-realworld-cell { background: #fff; border-radius: 3px; padding: .9rem 1rem; }
+  .mtg-realworld-cell-label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #888; margin-bottom: .2rem; }
+  .mtg-realworld-cell-val { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: #b45309; }
+  .mtg-realworld-cell-sub { font-size: 11px; color: #888; margin-top: .2rem; }
   .mtg-related-links { display: flex; flex-wrap: wrap; gap: .5rem; }
   .mtg-related-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #888; margin-bottom: .75rem; }
   .mtg-related-link { font-size: 12px; padding: .35rem .75rem; border: 1px solid #e0dbd3; border-radius: 2px; color: #555; text-decoration: none; transition: all .15s; display: inline-block; }
@@ -91,7 +98,7 @@ const staticCss = `
   @media (max-width: 600px) {
     .mtg-field-row, .mtg-field-row-3 { grid-template-columns: 1fr; }
     .mtg-result-grid { grid-template-columns: 1fr; }
-    .mtg-info-grid, .mtg-tip-grid { grid-template-columns: 1fr; }
+    .mtg-info-grid, .mtg-tip-grid, .mtg-realworld-row { grid-template-columns: 1fr; }
     .mtg-tabs { flex-direction: column; }
   }
 `
@@ -106,7 +113,7 @@ const FAQ = [
     a: "PITI stands for Principal, Interest, Taxes, and Insurance — the four components of a complete mortgage payment. Many online calculators show only principal and interest, which understates your real monthly cost by hundreds of dollars. On a $300,000 home, property tax and insurance alone can add $400-$600 per month to your payment. Always calculate PITI, not just P&I, when evaluating affordability."
   },
   {
-    q: "What is DTI and what does lenders look for?",
+    q: "What is DTI and what do lenders look for?",
     a: "DTI stands for debt-to-income ratio. Front-end DTI is your housing costs divided by your gross monthly income — most lenders want this below 28%. Back-end DTI adds all your monthly debt payments (car loans, credit cards, student loans) to housing costs — lenders typically cap this at 43%, though some programs allow up to 50% with compensating factors like excellent credit or large cash reserves. A lower DTI gives you more loan options and better rates."
   },
   {
@@ -120,7 +127,7 @@ const FAQ = [
   {
     q: "What credit score do I need to get a mortgage?",
     a: "The minimum credit score varies by loan type. FHA loans are available with scores as low as 580 (with 3.5% down) or even 500 (with 10% down). Conventional loans typically require a minimum of 620. However, your score dramatically affects your interest rate — the difference between a 680 and a 760 score can mean 0.5-1% higher rate, which on a $300,000 mortgage translates to $100+ more per month and over $36,000 more in total interest over 30 years. Improving your score before applying is one of the most valuable things you can do."
-  },
+  }
 ]
 
 export default function Page() {
@@ -129,7 +136,7 @@ export default function Page() {
       <style dangerouslySetInnerHTML={{ __html: staticCss }} />
       <main className="mtg-wrap">
 
-        <p className="mtg-nav"><a href="https://moneywisecalculator.com">&#8592; More free tools at MoneyWise Calculator</a></p>
+        <p className="mtg-nav"><a href="https://moneywisecalculator.com">← More free tools at MoneyWise Calculator</a></p>
 
         <div className="mtg-header">
           <p className="mtg-eyebrow">Home Buying</p>
@@ -140,7 +147,6 @@ export default function Page() {
           Free tool to calculate how much house you can afford and what your monthly mortgage payment will be. Includes full PITI breakdown (principal, interest, taxes, insurance), DTI analysis, PMI guidance, and an amortization schedule.
         </p>
 
-        {/* INTERACTIVE TOOL — client component */}
         <MortgageCalculator />
 
         {/* HOW IT WORKS */}
@@ -158,7 +164,7 @@ export default function Page() {
             </div>
             <div className="mtg-info-item">
               <p className="mtg-info-title">PITI explained</p>
-              <p className="mtg-info-body">PITI stands for Principal, Interest, Taxes, and Insurance — the four components of a true mortgage payment. Many calculators show only P&amp;I, which understates the real monthly cost by hundreds of dollars.</p>
+              <p className="mtg-info-body">PITI stands for Principal, Interest, Taxes, and Insurance — the four components of a true mortgage payment. Many calculators show only P&I, which understates the real monthly cost by hundreds of dollars.</p>
             </div>
             <div className="mtg-info-item">
               <p className="mtg-info-title">PMI</p>
@@ -179,6 +185,26 @@ export default function Page() {
             <p>Lenders will often approve borrowers for more than they can comfortably afford. A pre-approval letter reflects what the bank is willing to lend — not what leaves you with financial breathing room for maintenance, emergencies, property tax increases, and the inevitable costs of homeownership that do not show up in a mortgage payment. The gap between what the bank will lend and what you can actually afford is where financial stress lives.</p>
             <p>The total interest figure in the payment calculator is often the most clarifying number on this page. On a $300,000 loan at 7% over 30 years, total interest paid exceeds $418,000 — meaning you pay well over twice the loan amount by the end. This does not mean buying is wrong, but it changes how you think about extra principal payments, shorter loan terms, and the real cost of trading up to a more expensive home.</p>
           </div>
+        </div>
+
+        {/* REAL-WORLD EXAMPLE */}
+        <div className="mtg-realworld">
+          <p className="mtg-realworld-title">📊 Real-world example: Two buyers, same income, different outcomes</p>
+          <div className="mtg-realworld-row">
+            <div className="mtg-realworld-cell">
+              <p className="mtg-realworld-cell-label">Buyer A: 20% down, 760 credit score</p>
+              <p className="mtg-realworld-cell-val">$350,000 home</p>
+              <p className="mtg-realworld-cell-sub">$70k down · $2,188/month · $418k total interest</p>
+            </div>
+            <div className="mtg-realworld-cell">
+              <p className="mtg-realworld-cell-label">Buyer B: 5% down, 660 credit score</p>
+              <p className="mtg-realworld-cell-val">$350,000 home</p>
+              <p className="mtg-realworld-cell-sub">$17.5k down · $2,950/month + PMI · $487k total interest</p>
+            </div>
+          </div>
+          <p style={{ fontSize: "12px", color: "#78350f", marginTop: ".75rem" }}>
+            Buyer B pays <strong>$762 more per month</strong> and <strong>$69,000 more in total interest</strong> — for the exact same house. The difference? Down payment amount and credit score. Every percentage point in down payment and every 20 points in credit score directly affect what you can afford.
+          </p>
         </div>
 
         {/* TIPS */}
@@ -219,7 +245,7 @@ export default function Page() {
           ))}
         </div>
 
-        {/* RELATED */}
+        {/* RELATED TOOLS */}
         <div className="mtg-card">
           <p className="mtg-section-title">Related tools</p>
           <p className="mtg-related-label">More free tools from the MoneyWise Calculator network</p>
